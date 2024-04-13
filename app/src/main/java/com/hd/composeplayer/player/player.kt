@@ -17,7 +17,7 @@ import androidx.media3.ui.PlayerView
 
 @OptIn(UnstableApi::class)
 @Composable
-fun Player(context: Context, url: String, selected: Boolean){
+fun Player(context: Context, url: Uri, selected: Boolean){
     val videoPlayer = remember{
     ExoPlayer.Builder(context)
         .build().apply {
@@ -25,8 +25,7 @@ fun Player(context: Context, url: String, selected: Boolean){
                 .Factory(
                     DefaultDataSourceFactory(context, null)
                 )
-                .createMediaSource(MediaItem.fromUri(Uri.parse("asset:///${url}")))
-
+                .createMediaSource(MediaItem.fromUri(url))
             this.setMediaSource(mediaSource, true)
             this.prepare()
         }
